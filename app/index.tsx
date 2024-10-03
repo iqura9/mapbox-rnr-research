@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { Text, View } from "react-native";
+import { View } from "react-native";
 import MatrixButton from "~/components/MatrixButton";
 import MatrixInput from "~/components/MatrixInput";
+import { Text } from "~/components/ui/text";
 import { addMatrices, multiplyMatrices, subtractMatrices } from "~/utils/index";
-
 const MainScreen: React.FC = () => {
   const [size, setSize] = useState<number>(4);
   const [matrixA, setMatrixA] = useState<number[][]>(
@@ -52,7 +52,7 @@ const MainScreen: React.FC = () => {
               {row.map((val, colIndex) => (
                 <Text
                   key={colIndex}
-                  className="border p-2 m-1 w-12 text-center"
+                  className="border border-foreground p-2 m-1 w-12 text-center"
                 >
                   {val}
                 </Text>

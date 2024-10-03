@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, TouchableOpacity } from "react-native";
+import { Button } from "./ui/button";
 
 interface MatrixButtonProps {
   title: string;
@@ -7,9 +7,13 @@ interface MatrixButtonProps {
 }
 
 const MatrixButton: React.FC<MatrixButtonProps> = ({ title, onPress }) => (
-  <TouchableOpacity onPress={onPress} className="bg-blue-500 p-2 m-1 rounded">
-    <Text className="text-white text-center">{title}</Text>
-  </TouchableOpacity>
+  <Button
+    variant="default"
+    onPress={onPress}
+    className="bg-blue-500 p-2 m-1 rounded"
+  >
+    {title}
+  </Button>
 );
 
 export default MatrixButton;
