@@ -1,9 +1,13 @@
+import * as FileSystem from "expo-file-system";
+import { Link } from "expo-router";
 import React, { useState } from "react";
-import { Text, View } from "react-native";
+import { Alert, View } from "react-native";
 import MatrixButton from "~/components/MatrixButton";
 import MatrixInput from "~/components/MatrixInput";
+import { Text } from "~/components/ui/text";
 
 import { addMatrices, multiplyMatrices, subtractMatrices } from "~/utils/index";
+
 const MainScreen: React.FC = () => {
   const [size, setSize] = useState<number>(4);
   const [matrixA, setMatrixA] = useState<number[][]>(
@@ -26,6 +30,26 @@ const MainScreen: React.FC = () => {
     setResult(multiplyMatrices(matrixA, matrixB, size));
   };
 
+  const saveMatricesToFile = async () => {
+    const fileUri = FileSystem.documentDirectory + "matrices.txt";
+
+    const content = `Matrix A:\n${matrixA
+      .map((row) => row.join(", "))
+      .join("\n")}\n\nMatrix B:\n${matrixB
+      .map((row) => row.join(", "))
+      .join("\n")}\n\nResult:\n${
+      result ? result.map((row) => row.join(", ")).join("\n") : "No result"
+    }`;
+
+    try {
+      await FileSystem.writeAsStringAsync(fileUri, content);
+      Alert.alert("Success", `Matrices saved to: ${fileUri}`);
+    } catch (error) {
+      console.error(error);
+      Alert.alert("Error", "Failed to save matrices to file.");
+    }
+  };
+
   return (
     <View className="p-4">
       <Text className="text-2xl font-bold text-center mb-4">
@@ -42,7 +66,10 @@ const MainScreen: React.FC = () => {
         <MatrixButton title="Add" onPress={handleAdd} />
         <MatrixButton title="Subtract" onPress={handleSubtract} />
         <MatrixButton title="Multiply" onPress={handleMultiply} />
+        <MatrixButton title="Save" onPress={saveMatricesToFile} />
       </View>
+
+      <Link href="/aboutMe">About Me</Link>
 
       {result ? (
         <View className="mt-4">
