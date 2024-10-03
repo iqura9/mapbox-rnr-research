@@ -1,4 +1,5 @@
 import React from "react";
+import { Text } from "react-native";
 import { Button } from "./ui/button";
 
 interface MatrixButtonProps {
@@ -12,7 +13,7 @@ const MatrixButton: React.FC<MatrixButtonProps> = ({ title, onPress }) => (
     onPress={onPress}
     className="bg-blue-500 p-2 m-1 rounded"
   >
-    {title}
+    <Text>{title}</Text>
   </Button>
 );
 

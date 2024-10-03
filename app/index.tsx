@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { View } from "react-native";
+import { Text, View } from "react-native";
 import MatrixButton from "~/components/MatrixButton";
 import MatrixInput from "~/components/MatrixInput";
-import { Text } from "~/components/ui/text";
+
 import { addMatrices, multiplyMatrices, subtractMatrices } from "~/utils/index";
 const MainScreen: React.FC = () => {
   const [size, setSize] = useState<number>(4);
