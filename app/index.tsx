@@ -1,22 +1,41 @@
 import * as FileSystem from "expo-file-system";
 import { Link } from "expo-router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Alert, Dimensions, ScrollView, View } from "react-native";
 import { BarChart } from "react-native-chart-kit";
 import MatrixButton from "~/components/MatrixButton";
 import MatrixInput from "~/components/MatrixInput";
+import { Button } from "~/components/ui/button";
 import { Text } from "~/components/ui/text";
 
-import { addMatrices, multiplyMatrices, subtractMatrices } from "~/utils/index";
+import {
+  addMatrices,
+  calculateDeterminant,
+  inverseMatrix,
+  multiplyMatrices,
+  subtractMatrices,
+} from "~/utils/index";
+
+const MATRIX_SIZE = 4;
 
 const MainScreen: React.FC = () => {
-  const [size, setSize] = useState<number>(4);
+  const [size, setSize] = useState<number>(MATRIX_SIZE);
+
+  const [det, setDet] = useState<number | null>(null);
+
   const [matrixA, setMatrixA] = useState<number[][]>(
     Array.from({ length: size }, () => Array(size).fill(0))
   );
   const [matrixB, setMatrixB] = useState<number[][]>(
     Array.from({ length: size }, () => Array(size).fill(0))
   );
+
+  useEffect(() => {
+    setMatrixA(() => Array.from({ length: size }, () => Array(size).fill(0)));
+    setMatrixB(() => Array.from({ length: size }, () => Array(size).fill(0)));
+    setDet(null);
+  }, [size]);
+
   const [result, setResult] = useState<number[][] | null>(null);
 
   const handleAdd = () => {
@@ -29,6 +48,14 @@ const MainScreen: React.FC = () => {
 
   const handleMultiply = () => {
     setResult(multiplyMatrices(matrixA, matrixB, size));
+  };
+
+  const handleDeterminant = () => {
+    setDet(calculateDeterminant(matrixA));
+  };
+
+  const handleInvert = () => {
+    setResult(inverseMatrix(matrixA));
   };
 
   const saveMatricesToFile = async () => {
@@ -60,6 +87,14 @@ const MainScreen: React.FC = () => {
     ],
   };
 
+  const handleIncrement = () => {
+    setSize((prev) => Math.min(prev + 1, 7));
+  };
+
+  const handleDecrement = () => {
+    setSize((prev) => Math.max(prev - 1, 1));
+  };
+
   return (
     <ScrollView className="p-4">
       <Text className="text-2xl font-bold text-center mb-4">
@@ -71,6 +106,16 @@ const MainScreen: React.FC = () => {
       >
         About Me
       </Link>
+      <View className="flex flex-row gap-3">
+        <Button onPress={handleIncrement}>
+          <Text>+</Text>
+        </Button>
+        <Button onPress={handleDecrement}>
+          <Text>-</Text>
+        </Button>
+        {det !== null ? <Text>Determinant: {det}</Text> : null}
+      </View>
+
       <Text className="text-lg mb-2">Matrix A:</Text>
       <MatrixInput matrix={matrixA} setMatrix={setMatrixA} />
       <Text className="text-lg mb-2">Matrix B:</Text>
@@ -79,6 +124,8 @@ const MainScreen: React.FC = () => {
         <MatrixButton title="Add" onPress={handleAdd} />
         <MatrixButton title="Subtract" onPress={handleSubtract} />
         <MatrixButton title="Multiply" onPress={handleMultiply} />
+        <MatrixButton title="Invert" onPress={handleInvert} />
+        <MatrixButton title="Det" onPress={handleDeterminant} />
         <MatrixButton title="Save" onPress={saveMatricesToFile} />
       </View>
 
