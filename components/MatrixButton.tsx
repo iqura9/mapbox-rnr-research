@@ -8,11 +8,7 @@ interface MatrixButtonProps {
 }
 
 const MatrixButton: React.FC<MatrixButtonProps> = ({ title, onPress }) => (
-  <Button
-    variant="default"
-    onPress={onPress}
-    className="bg-blue-500 p-2 m-1 rounded"
-  >
+  <Button variant="default" onPress={onPress} className="bg-blue-500 p-2 m-1 rounded">
     <Text>{title}</Text>
   </Button>
 );

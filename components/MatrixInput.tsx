@@ -23,9 +23,7 @@ const MatrixInput: React.FC<MatrixInputProps> = ({ matrix, setMatrix }) => {
               className="border border-foreground p-2 m-1 w-12 text-center text-foreground"
               keyboardType="numeric"
               value={String(matrix[rowIndex][colIndex])}
-              onChangeText={(text: string) =>
-                handleInputChange(text, rowIndex, colIndex)
-              }
+              onChangeText={(text: string) => handleInputChange(text, rowIndex, colIndex)}
             />
           ))}
         </View>
