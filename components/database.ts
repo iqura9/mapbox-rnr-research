@@ -1,6 +1,6 @@
 import { openDatabase } from "expo-sqlite";
 
-const db = openDatabase("books.db");
+export const db = openDatabase("books.db");
 
 export const initializeDatabase = () => {
   db.transaction((tx) => {

@@ -1,9 +1,7 @@
 import { router } from "expo-router";
-import { openDatabase } from "expo-sqlite";
 import React, { useState } from "react";
 import { Alert, Text, TextInput, TouchableOpacity, View } from "react-native";
-
-const db = openDatabase("books.db");
+import { db } from "~/components/database";
 
 const CreateBookScreen = () => {
   const [author, setAuthor] = useState("");
