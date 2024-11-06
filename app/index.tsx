@@ -34,6 +34,9 @@ const HomeScreen = () => {
       <TouchableOpacity className="bg-blue-500 p-2 rounded mb-4" onPress={() => router.push("/ContactsScreen")}>
         <Text className="text-white text-center">Контакти</Text>
       </TouchableOpacity>
+      <TouchableOpacity className="bg-blue-500 p-2 rounded mb-4" onPress={() => router.push("/MapScreen")}>
+        <Text className="text-white text-center">Карта</Text>
+      </TouchableOpacity>
       <Text className="text-xl font-bold mb-2">Книги, вік яких понад 10 років:</Text>
       <FlatList
         data={oldBooks}

@@ -16,6 +16,7 @@
     "ios": {
       "supportsTablet": true,
       "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "Цей додаток використовує вашу локацію для показу вашого місцезнаходження на карті.",
         "NSContactsUsageDescription": "Цей додаток використовує контакти для відображення контактів з прізвищем, що закінчується на 'ко'."
       }
     },
