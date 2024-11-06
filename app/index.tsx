@@ -31,7 +31,9 @@ const HomeScreen = () => {
       <TouchableOpacity className="bg-blue-500 p-2 rounded mb-4" onPress={() => router.push("/CreateBookScreen")}>
         <Text className="text-white text-center">Додати нову книгу</Text>
       </TouchableOpacity>
-
+      <TouchableOpacity className="bg-blue-500 p-2 rounded mb-4" onPress={() => router.push("/ContactsScreen")}>
+        <Text className="text-white text-center">Контакти</Text>
+      </TouchableOpacity>
       <Text className="text-xl font-bold mb-2">Книги, вік яких понад 10 років:</Text>
       <FlatList
         data={oldBooks}
@@ -39,17 +41,6 @@ const HomeScreen = () => {
         renderItem={({ item }) => <Text className="text-base">{item.title}</Text>}
       />
       <Text className="text-base mt-2">Відсоток відібраних книг: {percentage}%</Text>
-
-      <Text className="text-xl font-bold mt-4 mb-2">Контакти з прізвищем, що закінчується на "ко":</Text>
-      <FlatList
-        data={filteredContacts}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => (
-          <Text className="text-base">
-            {item.surname} {item.name}
-          </Text>
-        )}
-      />
     </View>
   );
 };

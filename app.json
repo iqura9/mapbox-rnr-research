@@ -14,7 +14,10 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSContactsUsageDescription": "Цей додаток використовує контакти для відображення контактів з прізвищем, що закінчується на 'ко'."
+      }
     },
     "android": {
       "adaptiveIcon": {
