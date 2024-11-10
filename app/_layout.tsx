@@ -1,11 +1,9 @@
 import { SplashScreen, Stack } from "expo-router";
 import { useEffect } from "react";
 
-import "~/global.css"; // Ensure this path is correct and the file exists
-
+import "~/global.css";
 export { ErrorBoundary } from "expo-router";
 
-// Prevent the splash screen from auto-hiding before getting the color scheme.
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
@@ -18,13 +16,19 @@ export default function RootLayout() {
       <Stack.Screen
         name="index"
         options={{
-          title: "Lab 2, made by Korniienko Oleksandr",
+          title: "Korniienko Oleksandr research",
         }}
       />
       <Stack.Screen
         name="aboutMe"
         options={{
           title: "About Me",
+        }}
+      />
+      <Stack.Screen
+        name="MapScreen"
+        options={{
+          title: "Mapbox-map",
         }}
       />
     </Stack>
