@@ -1,21 +1,23 @@
-import MapboxGL, { Camera, MapView } from "@rnmapbox/maps";
-import React from "react";
-import { View } from "react-native";
+import MapboxGL from "@rnmapbox/maps";
+import React, { useRef } from "react";
+import useMarkers, { MarkerLayer } from "~/components/useMarkers";
+import { KYIV_COORDS } from "~/utils";
 
 const mapboxToken = process.env.EXPO_PUBLIC_MAPBOX_ACCESS_TOKEN ?? "";
 
 MapboxGL.setAccessToken(mapboxToken);
 
-const KYIV_COORDS: [number, number] = [30.5234, 50.4501];
+function MapScreen() {
+  const mapRef = useRef<MapboxGL.MapView | null>(null);
+  const coordinatesList = useMarkers({ mapRef, count: 2 });
 
-const MapScreen = () => {
   return (
-    <View className="flex-1 h-[300px] w-full">
-      <MapView style={{ flex: 1 }} styleURL="mapbox://styles/mapbox/streets-v12">
-        <Camera zoomLevel={12} centerCoordinate={KYIV_COORDS}></Camera>
-      </MapView>
-    </View>
+    <MapboxGL.MapView ref={mapRef} style={{ flex: 1 }}>
+      <MapboxGL.Camera zoomLevel={12} centerCoordinate={KYIV_COORDS} />
+
+      <MarkerLayer coordinatesList={coordinatesList} />
+    </MapboxGL.MapView>
   );
-};
+}
 
 export default MapScreen;
